@@ -6,6 +6,7 @@ gem 'fog'
 
 group :production do
   gem 'pg'
+  gem 'dm-postgres-adapter'
 end
 
 group :development do
