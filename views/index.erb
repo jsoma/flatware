@@ -107,9 +107,9 @@ git push heroku master</pre>
       <ul>
         <% Spreadsheet.all.each do |spreadsheet| %>
           <li>
-            <a target="_new" href="https://docs.google.com/spreadsheet/pub?hl=en_US&hl=en_US&key=<%= spreadsheet.google_key %>&output=html">
-              <%= spreadsheet.google_key %>
-            </a>
+            <%= spreadsheet.google_key %>
+            <a target="_new" href="https://docs.google.com/spreadsheet/pub?hl=en_US&hl=en_US&key=<%= spreadsheet.google_key %>&output=html">Google</a>
+            <a target="_new" href="https://s3.amazonaws.com/<%= ENV['AWS_BUCKET'] %>/<%= spreadsheet.google_key %>">S3</a>
             <% if !@updated.nil? and @updated.include?(spreadsheet) %>
               <span class="label label-success">Updated</span>
             <% end %>

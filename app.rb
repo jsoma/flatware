@@ -4,7 +4,7 @@ class Spreadsheet
   include DataMapper::Resource
   
   property :id, Serial
-  property :google_key, String, :unique => true, :required => true, :format => /\A\w*\z/
+  property :google_key, String, :unique => true, :required => true, :format => /\A[\w\-]*\z/
   
   def base_json_path
     "/feeds/worksheets/#{google_key}/public/basic?alt=json-in-script&callback=Tabletop.singleton.loadSheets"
@@ -21,7 +21,7 @@ class Spreadsheet
   end
 
   def sheet_ids
-    @sheet_ids ||= base_json_content.scan(/\/public\/basic\/(\w*)/).flatten.uniq
+    @sheet_ids ||= base_json_content.scan(/\/public\/basic\/([\w\-]*)/).flatten.uniq
   end
   
   def storage
@@ -33,7 +33,7 @@ class Spreadsheet
   end
   
   def write(path, options = {})    
-    cached_filename = path.gsub(/[^\w]/,'')
+    cached_filename = path.gsub(/[^\w\-]/,'')
     content = options[:content] || open(endpoint + path).read
     # File.open("#{Sinatra::Application.settings.root}/tmp/#{cached_filename}", 'w') { |f| f.write(content) } 
     upload(options[:filename] || cached_filename, content)
