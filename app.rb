@@ -16,7 +16,7 @@ class Spreadsheet
   
   def sheet_paths
     @sheet_paths ||= @sheet_ids.map{ |sheet_id|
-      "/feeds/list/#{google_key}/#{sheet_id}/public/values?alt=json-in-script&sq=&callback=Tabletop.singleton.loadSheet";
+      "/feeds/list/#{google_key}/#{sheet_id}/public/values?alt=json-in-script&sq=&callback=Tabletop.singleton.loadSheet"
     }
   end
 

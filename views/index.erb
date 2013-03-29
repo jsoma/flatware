@@ -81,8 +81,8 @@ git push heroku master</pre>
         
         <h3>Uploading to S3</h3>
         <p>The easy way <em>right now</em> is to click "Sync all spreadsheets" over on the right-hand column</p>
-        <p>But you should probably run the rake task <code>rake flatware:process</code> instead, which loops through all spreadsheets and tries to get them up on S3.</p>
-        
+        <p>But you should probably run the rake task <code>rake flatware:process</code> instead, which loops through all spreadsheets and tries to get them up on S3. On Heroku that would be</p>
+        <pre>heroku run rake flatware:process</pre>
         <hr>
         
         <h3>Automating the process</h3>
