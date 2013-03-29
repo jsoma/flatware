@@ -2,7 +2,9 @@
 
 **Flatware** provides a tiny S3 buffer between you and Google Spreadsheets, protecting you from downtime, lag and the terrifying caprice of Mountain View. It's meant to be used with [Tabletop.js](https://github.com/jsoma/tabletop).
 
-### The Whole Shebang
+Alternatives can be found in Tabletop.js's `/caching` directory.
+
+## The Whole Shebang
 
 **Step One**: [Get a Heroku account](https://devcenter.heroku.com/articles/quickstart) and install their [Toolbelt nonsense](https://toolbelt.heroku.com)
 
@@ -29,6 +31,8 @@
 
 **Step Eight**: If you'd like, you can use [Heroku Scheduler](https://devcenter.heroku.com/articles/scheduler) to automatically run your `rake` task every X minutes.
 
-### Me?
+## Me?
 
 Hi, I'm Soma, I make things. Questions/comments/tiny daggers can be shot to [@dangerscarf](http://twitter.com/dangerscarf) or [jonathan.soma@gmail.com](jonathan.soma@gmail.com).
+
+Flatware was made over a harried afternoon so pull requests are more than welcome.
