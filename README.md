@@ -15,7 +15,7 @@
     heroku create
     git push heroku master
 
-**Step Four**: Set up your environment to reflect your S3 options
+**Step Four**: Set up your environment to reflect your [S3 info](https://portal.aws.amazon.com/gp/aws/developer/account/index.html?action=access-key)
 
   heroku config:add AWS_ACCESS_KEY_ID=xxx AWS_SECRET_ACCESS_KEY=yyy AWS_BUCKET=zzz
 
