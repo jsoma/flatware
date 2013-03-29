@@ -15,15 +15,19 @@
     heroku create
     git push heroku master
 
-**Step Four**: Visit your page and add a Google Spreadsheet. Maybe just use this one down here:
+**Step Four**: Set up your environment to reflect your S3 options
+
+  heroku config:add AWS_ACCESS_KEY_ID=xxx AWS_SECRET_ACCESS_KEY=yyy AWS_BUCKET=zzz
+
+**Step Five**: Visit your page and add a Google Spreadsheet. Maybe just use this one down here:
 
     https://docs.google.com/spreadsheet/pub?hl=en_US&hl=en_US&key=0AmYzu_s7QHsmdE5OcDE1SENpT1g2R2JEX2tnZ3ZIWHc&output=html
     
-**Step Five**: Process the JSON to S3, using either `heroku run rake flatware:process` or clicking the **Sync all spreadsheets** button.
+**Step Six**: Process the JSON to S3, using either `heroku run rake flatware:process` or clicking the **Sync all spreadsheets** button.
 
-**Step Six**: Edit a Tabletop.js file to reflect your new cached set of data on S3. Try `/examples/proxy/index.html` and changing `proxy: 'https://s3.amazonaws.com/flatware-live'` to reflect your bucket
+**Step Seven**: Edit a Tabletop.js file to reflect your new cached set of data on S3. Try `/examples/proxy/index.html` and changing `proxy: 'https://s3.amazonaws.com/flatware-live'` to reflect your bucket
 
-**Step Seven**: If you'd like, you can use [Heroku Scheduler](https://devcenter.heroku.com/articles/scheduler) to automatically run your `rake` task every X minutes.
+**Step Eight**: If you'd like, you can use [Heroku Scheduler](https://devcenter.heroku.com/articles/scheduler) to automatically run your `rake` task every X minutes.
 
 ### Me?
 
