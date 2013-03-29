@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Flatware: Eat up your spreadsheets</title>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.js"></script>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/css/bootstrap.css">
+  <style>
+    body {
+      padding-top: 60px;
+    }
+    
+    .hero-unit {
+      background: #A1E7F9;
+      color: black;
+    }
+    
+    .hero-unit h1 {
+      margin-bottom: 20px;
+    }
+
+    h3 {
+      border-left: solid #A1E7F9 20px;
+      padding-left: 10px;
+    }
+  </style>
+  <meta name="robots" content="noindex, nofollow">
+</head>
+<body>
+  <div class="container">
+
+  <div class="row">
+    <div class="span6">
+      <% if !@notice.nil? %>
+        <div class="alert alert-success">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <%= @notice %>
+        </div>
+      <% end %>
+      
+      <% if !@error.nil? %>
+        <div class="alert alert-error">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <%= @error %>
+        </div>
+      <% end %>
+      
+      <div class="hero-unit">
+        <h1>Flatware</h1>
+        <p>Flatware provides a tiny S3 buffer between you and Google Spreadsheets, protecting you from downtime, lag and the terrifying caprice of Mountain View.</p>
+      </div>
+      <div>
+        <h3>The What-For</h3>
+        <p><a href="http://www.github.com/jsoma/flatware">Flatware</a> takes Google Spreadsheet JSON responses and uploads them to S3, so when using <a href="https://github.com/jsoma/tabletop">Tabletop.js</a> you don't have to rely on Google Spreadsheets necessarily being up and around.</p>
+        
+        <hr>
+        
+        <h3>The Backend How-To</h3>
+        <p>You'll need to run your own instance of Flatware on your own Heroku account, but it ain't hard. If you're set up with <a href="http://heroku.com">heroku</a>, the <a href="http://www.github.com/jsoma/flatware">github repo</a> can just be cloned locally and pushed right up.</p>
+        <pre>git clone git@github.com:jsoma/flatware.git
+cd flatware
+heroku create
+git push heroku master</pre>
+        <p>Then you'll need to add in your <a href="http://aws.amazon.com">Amazon Web Services</a> keys and the bucket you'd like to drop the content in.</p>
+        <pre>heroku config:add AWS_ACCESS_KEY_ID=xxx AWS_SECRET_ACCESS_KEY=yyy AWS_BUCKET=zzz</pre>
+        <hr>
+        
+        <h3>The Frontend How-To</h3>
+        <p>When you're using <a href="https://github.com/jsoma/tabletop">Tabletop.js</a>, just pass </p>
+        <pre>proxy: 'https://s3.amazonaws.com/yourbucketname'</pre>
+        <p>and as long as you've synced you'll be golden.</p>
+
+        <hr>
+        
+        <h3>Adding new Spreadsheets</h3>
+        <p>Easy-peasy. Over on the right you add either a spreadsheet key or a full URL like, so either of the below would work.</p>
+        <pre>0AmYzu_s7QHsmdE5OcDE1SENpT1g2R2JEX2tnZ3ZIWHc</pre>
+        <pre>https://docs.google.com/spreadsheet/pub?hl=en_US&hl=en_US&key=0AmYzu_s7QHsmdE5OcDE1SENpT1g2R2JEX2tnZ3ZIWHc&output=html</pre>
+        
+        <hr>
+        
+        <h3>Uploading to S3</h3>
+        <p>The easy way <em>right now</em> is to click "Sync all spreadsheets" over on the right-hand column</p>
+        <p>But you should probably run the rake task <code>rake flatware:process</code> instead, which loops through all spreadsheets and tries to get them up on S3.</p>
+        
+        <hr>
+        
+        <h3>Automating the process</h3>
+        <p>If you're using Heroku, you can use <a href="https://devcenter.heroku.com/articles/scheduler">Scheduler</a> to run <code>rake flatware:process</code> every X minutes.</p>
+        <p>They docs for scheduling a task are kind of buried, you can <a href="https://devcenter.heroku.com/articles/scheduler#scheduling-jobs">find them here</a>.</p>
+        
+        <hr>
+        
+        <h3>Who the hell am I?</h3>
+        <p>Hi, I'm Jonathan Soma, I made <a href="https://github.com/jsoma/tabletop">Tabletop.js</a> and run <a href="http://brooklynbrainery.com">Brooklyn Brainery</a>. Questions, comments and righteous outrage can find me at <a href="http://twitter.com/dangerscarf">@dangerscarf</a> or <a href="mailto:jonathan.soma@gmail.com">jonathan.soma@gmail.com</a>.</p>
+        <p>I made Flatware in like an afternoon so please please <a href="https://github.com/jsoma/flatware">contribute to the repo on github</a>.</p>
+      </div>
+    </div>
+
+    <div class="span6">
+      <h2>The Spreadsheets</h2>
+      <form action="/" method="post" class="form-inline">
+        <input name="key" type="text" placeholder="Add a published URL or key"> 
+        <button type="submit" class="btn btn-primary">Add it</button>
+      </form>
+      <h3>Current spreadsheets</h3>
+      <ul>
+        <% Spreadsheet.all.each do |spreadsheet| %>
+          <li>
+            <a target="_new" href="https://docs.google.com/spreadsheet/pub?hl=en_US&hl=en_US&key=<%= spreadsheet.google_key %>&output=html">
+              <%= spreadsheet.google_key %>
+            </a>
+            <% if !@updated.nil? and @updated.include?(spreadsheet) %>
+              <span class="label label-success">Updated</span>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+      <form action="/process" method="post">
+        <p><button type="submit" class="btn btn-submit">Sync all spreadsheets</button></p>
+      </form>
+    </div>
+
+  </div>
+  </div>
+</body>
+</html>
