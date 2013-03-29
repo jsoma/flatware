@@ -40,7 +40,8 @@ class Spreadsheet
   end
   
   def upload(filename, content)
-    directory.files.create(:key => filename, :body => content, :public => true, :content_type => "application/json")
+    # Using an obsolete content_type because IE8 and before chokes on application/javascript and hey, Google does it.
+    directory.files.create(:key => filename, :body => content, :public => true, :content_type => "text/javascript")
   end
   
   def write_content
