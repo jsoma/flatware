@@ -23,6 +23,29 @@
       border-left: solid #A1E7F9 20px;
       padding-left: 10px;
     }
+
+    .sync-single {
+      display: inline-block;
+      float: right;
+      margin: 0;
+    }
+
+    .spreadsheets {
+      list-style-type: none;
+      margin-left: 0;
+    }
+
+    .spreadsheets li {
+      padding: 10px;
+    }
+
+    .spreadsheets li:nth-child(even) {
+      background: #f1f1fc;
+    }
+
+    .actions {
+      margin-top: 5px;
+    }
   </style>
   <meta name="robots" content="noindex, nofollow">
 </head>
@@ -104,15 +127,20 @@ git push heroku master</pre>
         <button type="submit" class="btn btn-primary">Add it</button>
       </form>
       <h3>Current spreadsheets</h3>
-      <ul>
+      <ul class="spreadsheets">
         <% Spreadsheet.all.each do |spreadsheet| %>
           <li>
-            <%= spreadsheet.google_key %>
-            <a target="_new" href="https://docs.google.com/spreadsheet/pub?hl=en_US&hl=en_US&key=<%= spreadsheet.google_key %>&output=html">Google</a>
-            <a target="_new" href="https://s3.amazonaws.com/<%= ENV['AWS_BUCKET'] %>/<%= spreadsheet.google_key %>">S3</a>
+            <strong>Key:</strong> <%= spreadsheet.google_key %>               
             <% if !@updated.nil? and @updated.include?(spreadsheet) %>
               <span class="label label-success">Updated</span>
             <% end %>
+            <div class="actions">
+              <form class='sync-single' action="/process/<%= spreadsheet.google_key %>" method="post">
+                  <button type="submit" class="btn btn-mini btn-primary">Sync</button>
+              </form>
+              <a target="_new" href="https://docs.google.com/spreadsheet/pub?hl=en_US&hl=en_US&key=<%= spreadsheet.google_key %>&output=html" class="btn btn-mini btn-info">View on Google</a>
+              <a target="_new" href="https://s3.amazonaws.com/<%= ENV['AWS_BUCKET'] %>/<%= spreadsheet.google_key %>" class="btn btn-mini btn-warning">View on S3</a>
+            </div>
           </li>
         <% end %>
       </ul>

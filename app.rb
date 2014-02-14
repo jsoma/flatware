@@ -93,6 +93,16 @@ get '/process' do
   redirect '/'
 end
 
+post '/process/:key' do
+  spreadsheet = Spreadsheet.first(:google_key => params[:key])
+  if spreadsheet and spreadsheet.write_content
+    @notice = "Successful"
+  else
+    @error = "Unsuccessful"
+  end
+  redirect '/'
+end
+
 post '/process' do
   @updated = Spreadsheet.select(&:write_content)
   @notice = "Updated #{@updated.length} spreadsheets"
