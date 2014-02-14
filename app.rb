@@ -29,7 +29,7 @@ class Spreadsheet
   end
   
   def directory
-    storage.directories.get(ENV['AWS_BUCKET']) || create(:key => ENV['AWS_BUCKET'], :public => true)
+    storage.directories.get(ENV['AWS_BUCKET']) || storage.directories.create(:key => ENV['AWS_BUCKET'], :public => true)
   end
   
   def write(path, options = {})    
@@ -40,7 +40,8 @@ class Spreadsheet
   end
   
   def upload(filename, content)
-    directory.files.create(:key => filename, :body => content, :public => true, :content_type => "application/json")
+    # Using an obsolete content_type because IE8 and before chokes on application/javascript and hey, Google does it.
+    directory.files.create(:key => filename, :body => content, :public => true, :content_type => "text/javascript")
   end
   
   def write_content
@@ -89,6 +90,16 @@ post '/' do
 end
 
 get '/process' do
+  redirect '/'
+end
+
+post '/process/:key' do
+  spreadsheet = Spreadsheet.first(:google_key => params[:key])
+  if spreadsheet and spreadsheet.write_content
+    @notice = "Successful"
+  else
+    @error = "Unsuccessful"
+  end
   redirect '/'
 end
 
