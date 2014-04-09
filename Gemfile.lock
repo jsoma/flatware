@@ -79,6 +79,7 @@ GEM
     net-ssh (2.5.2)
     nokogiri (1.5.11)
     pg (0.14.1)
+    psych (2.0.5)
     rack (1.5.2)
     rack-protection (1.5.0)
       rack
@@ -101,4 +102,5 @@ DEPENDENCIES
   fog
   nokogiri (~> 1.5.11)
   pg
+  psych (~> 2.0.5)
   sinatra
