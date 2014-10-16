@@ -16,7 +16,7 @@ class Spreadsheet
   
   def sheet_paths
     @sheet_paths ||= @sheet_ids.map{ |sheet_id|
-      "/feeds/list/#{google_key}/#{sheet_id}/public/values?alt=json-in-script&sq=&callback=Tabletop.singleton.loadSheet"
+      "/feeds/list/#{google_key}/#{sheet_id}/public/values?alt=json-in-script&callback=Tabletop.singleton.loadSheet"
     }
   end
 
@@ -48,7 +48,7 @@ class Spreadsheet
     write(base_json_path, :content => base_json_content, :filename => google_key)
 
     sheet_ids.each do |sheet_id|
-      path = "/feeds/list/#{google_key}/#{sheet_id}/public/values?alt=json-in-script&sq=&callback=Tabletop.singleton.loadSheet"
+      path = "/feeds/list/#{google_key}/#{sheet_id}/public/values?alt=json-in-script&callback=Tabletop.singleton.loadSheet"
       write(path, :filename => "#{google_key}-#{sheet_id}")
     end
   rescue OpenURI::HTTPError => e
