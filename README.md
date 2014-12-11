@@ -21,7 +21,7 @@ Alternatives can be found in Tabletop.js's `/caching` directory.
 
   heroku config:add AWS_ACCESS_KEY_ID=xxx AWS_SECRET_ACCESS_KEY=yyy AWS_BUCKET=zzz
 
-** Step Four Point Five**: If you're using the old version of Google Spreadsheets, set the following environment variable:
+**Step Four Point Five**: If you're using the old version of Google Spreadsheets, set the following environment variable:
 
   heroku config:add FLATWARE_USE_OLD_SHEETS=true
 
