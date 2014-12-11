@@ -1,4 +1,4 @@
-# **Flatware** 
+# **Flatware**
 
 **Flatware** provides a tiny S3 buffer between you and Google Spreadsheets, protecting you from downtime, lag and the terrifying caprice of Mountain View. It's meant to be used with [Tabletop.js](https://github.com/jsoma/tabletop).
 
@@ -21,10 +21,14 @@ Alternatives can be found in Tabletop.js's `/caching` directory.
 
   heroku config:add AWS_ACCESS_KEY_ID=xxx AWS_SECRET_ACCESS_KEY=yyy AWS_BUCKET=zzz
 
+** Step Four Point Five**: If you're using the old version of Google Spreadsheets, set the following environment variable:
+
+  heroku config:add FLATWARE_USE_OLD_SHEETS=true
+
 **Step Five**: Visit your page and add a Google Spreadsheet. Maybe just use this one down here:
 
     https://docs.google.com/spreadsheet/pub?hl=en_US&hl=en_US&key=0AmYzu_s7QHsmdE5OcDE1SENpT1g2R2JEX2tnZ3ZIWHc&output=html
-    
+
 **Step Six**: Process the JSON to S3, using either `heroku run rake flatware:process` or clicking the **Sync all spreadsheets** button.
 
 **Step Seven**: Edit a Tabletop.js file to reflect your new cached set of data on S3. Try `/examples/proxy/index.html` and changing `proxy: 'https://s3.amazonaws.com/flatware-live'` to reflect your bucket
