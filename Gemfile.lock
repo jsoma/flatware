@@ -1,9 +1,10 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    CFPropertyList (2.3.1)
     addressable (2.2.8)
     bcrypt-ruby (3.0.1)
-    builder (3.0.4)
+    builder (3.2.2)
     data_mapper (1.2.0)
       dm-aggregates (~> 1.2.0)
       dm-constraints (~> 1.2.0)
@@ -57,32 +58,119 @@ GEM
       data_objects (= 0.10.8)
     do_sqlite3 (0.10.8)
       data_objects (= 0.10.8)
-    excon (0.16.2)
+    excon (0.45.3)
     fastercsv (1.5.5)
-    fog (1.5.0)
+    fission (0.5.0)
+      CFPropertyList (~> 2.2)
+    fog (1.30.0)
+      fog-atmos
+      fog-aws (~> 0.0)
+      fog-brightbox (~> 0.4)
+      fog-core (~> 1.27, >= 1.27.4)
+      fog-ecloud
+      fog-google (>= 0.0.2)
+      fog-json
+      fog-local
+      fog-powerdns (>= 0.1.1)
+      fog-profitbricks
+      fog-radosgw (>= 0.0.2)
+      fog-riakcs
+      fog-sakuracloud (>= 0.0.4)
+      fog-serverlove
+      fog-softlayer
+      fog-storm_on_demand
+      fog-terremark
+      fog-vmfusion
+      fog-voxel
+      fog-xml (~> 0.1.1)
+      ipaddress (~> 0.5)
+      nokogiri (~> 1.5, >= 1.5.11)
+    fog-atmos (0.1.0)
+      fog-core
+      fog-xml
+    fog-aws (0.3.0)
+      fog-core (~> 1.27)
+      fog-json (~> 1.0)
+      fog-xml (~> 0.1)
+      ipaddress (~> 0.8)
+    fog-brightbox (0.7.1)
+      fog-core (~> 1.22)
+      fog-json
+      inflecto (~> 0.0.2)
+    fog-core (1.30.0)
       builder
-      excon (~> 0.14)
-      formatador (~> 0.2.0)
+      excon (~> 0.45)
+      formatador (~> 0.2)
       mime-types
-      multi_json (~> 1.0)
-      net-scp (~> 1.0.4)
+      net-scp (~> 1.1)
       net-ssh (>= 2.1.3)
-      nokogiri (~> 1.5.0)
-      ruby-hmac
-    formatador (0.2.3)
+    fog-ecloud (0.1.1)
+      fog-core
+      fog-xml
+    fog-google (0.0.5)
+      fog-core
+      fog-json
+      fog-xml
+    fog-json (1.0.1)
+      fog-core (~> 1.0)
+      multi_json (~> 1.0)
+    fog-local (0.2.1)
+      fog-core (~> 1.27)
+    fog-powerdns (0.1.1)
+      fog-core (~> 1.27)
+      fog-json (~> 1.0)
+      fog-xml (~> 0.1)
+    fog-profitbricks (0.0.2)
+      fog-core
+      fog-xml
+      nokogiri
+    fog-radosgw (0.0.4)
+      fog-core (>= 1.21.0)
+      fog-json
+      fog-xml (>= 0.0.1)
+    fog-riakcs (0.1.0)
+      fog-core
+      fog-json
+      fog-xml
+    fog-sakuracloud (1.0.1)
+      fog-core
+      fog-json
+    fog-serverlove (0.1.2)
+      fog-core
+      fog-json
+    fog-softlayer (0.4.6)
+      fog-core
+      fog-json
+    fog-storm_on_demand (0.1.1)
+      fog-core
+      fog-json
+    fog-terremark (0.1.0)
+      fog-core
+      fog-xml
+    fog-vmfusion (0.1.0)
+      fission
+      fog-core
+    fog-voxel (0.1.0)
+      fog-core
+      fog-xml
+    fog-xml (0.1.2)
+      fog-core
+      nokogiri (~> 1.5, >= 1.5.11)
+    formatador (0.2.5)
+    inflecto (0.0.2)
+    ipaddress (0.8.0)
     json (1.7.7)
     json_pure (1.7.7)
-    mime-types (1.21)
-    multi_json (1.7.2)
-    net-scp (1.0.4)
-      net-ssh (>= 1.99.1)
-    net-ssh (2.5.2)
+    mime-types (2.6.1)
+    multi_json (1.11.0)
+    net-scp (1.2.1)
+      net-ssh (>= 2.6.5)
+    net-ssh (2.9.2)
     nokogiri (1.5.11)
     pg (0.14.1)
     rack (1.5.2)
     rack-protection (1.5.0)
       rack
-    ruby-hmac (0.4.0)
     sinatra (1.4.2)
       rack (~> 1.5, >= 1.5.2)
       rack-protection (~> 1.4)
