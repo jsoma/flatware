@@ -1,4 +1,4 @@
-DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/db/dev.sqlite3")
+DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/dev.sqlite3")
 
 class Spreadsheet
   include DataMapper::Resource
