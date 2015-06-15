@@ -190,3 +190,6 @@ DEPENDENCIES
   nokogiri (~> 1.5.11)
   pg
   sinatra
+
+BUNDLED WITH
+   1.10.2

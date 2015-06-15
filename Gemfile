@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.0.0'
 
 gem 'nokogiri', '~> 1.5.11'
 gem 'sinatra'
